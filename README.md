@@ -1,8 +1,31 @@
-# React + Vite
+## DevTinder UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- create vite-react app
+  npm create vite@latest devTinderUI -- --template react
+- Install all node packages required
+  npm install
+- Remove unnecessary code
+- Write Hello world Program and run
+  npm run dev
+- Now In this project we are using tailwind css and daisyUI
+- Install tailwind css v4.0
+  npm install tailwindcss @tailwindcss/vite
 
-Currently, two official plugins are available:
+- write the above code in vite.config.js file
+  import { defineConfig } from 'vite'
+  import tailwindcss from '@tailwindcss/vite'
+  export default defineConfig({
+  plugins: [
+  tailwindcss(),
+  ],
+  })
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- import tailwindcss in index.css file
+  @import "tailwindcss";
+
+- Now write some tailwindcss commands in the code and start the app. It should reflect
+
+-Now install daisyUi
+npm i -D daisyui@latest
+
+- put require('daisyui') in vite.config.js

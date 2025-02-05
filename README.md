@@ -29,3 +29,5 @@
 npm i -D daisyui@latest
 
 - put require('daisyui') in vite.config.js
+
+- shortcut for boiler code is "rafce"(react arrow function export component)

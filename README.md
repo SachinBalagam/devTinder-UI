@@ -31,3 +31,11 @@ npm i -D daisyui@latest
 - put require('daisyui') in vite.config.js
 
 - shortcut for boiler code is "rafce"(react arrow function export component)
+
+- created Body,Feed,Footer,Login,Navbar,Profile components
+- created utils folder => appStore.js, constants.js, userSlice.js files in it
+- installed react-redux and redux-toolkit to manage globalContext
+- configured Store => Provider => createdSlice => added reducers
+- dispatched in Login Page
+- useSelector in Navbar
+- Urls should not be hard coded so constants file is created and there we kept the url and using across the app

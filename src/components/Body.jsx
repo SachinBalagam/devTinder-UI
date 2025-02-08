@@ -28,8 +28,12 @@ const Body = () => {
   };
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+    if (!userData) {
+      navigate("/login");
+    } else {
+      fetchUser();
+    }
+  }, [navigate, userData]);
 
   return (
     <div>

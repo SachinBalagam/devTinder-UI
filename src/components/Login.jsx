@@ -6,8 +6,8 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("sachin@gmail.com");
-  const [password, setPassword] = useState("Sachin@123");
+  const [emailId, setEmailId] = useState("virat@gmail.com");
+  const [password, setPassword] = useState("Virat@123");
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const Login = () => {
   }, [user, navigate]);
 
   const handleLogin = async () => {
+    setError("");
     try {
       const res = await axios.post(
         BASE_URL + "/login",
@@ -35,6 +36,9 @@ const Login = () => {
     } catch (e) {
       console.log(e);
       setError(e.response.data);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   };
 

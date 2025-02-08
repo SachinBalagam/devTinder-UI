@@ -1,6 +1,6 @@
 // import { useSelector } from "react-redux";
 import axios from "axios";
-import UserCard from "./userCard";
+import UserCard from "./UserCard";
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,13 +12,17 @@ const Feed = () => {
   console.log(feedData);
 
   const fetchFeed = async () => {
-    if (feedData) {
+    if (feedData && feedData.length > 0) {
       return;
     }
-    const res = await axios.get(BASE_URL + "/user/feed", {
-      withCredentials: true,
-    });
-    dispatch(addFeed(res.data.data));
+    try {
+      const res = await axios.get(BASE_URL + "/user/feed", {
+        withCredentials: true,
+      });
+      dispatch(addFeed(res.data.data));
+    } catch (err) {
+      console.log(err.response.data);
+    }
   };
 
   useEffect(() => {

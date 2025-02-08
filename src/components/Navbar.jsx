@@ -1,15 +1,30 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
+    dispatch(removeUser());
+    navigate("/login");
+  };
+
   return (
     <div className="navbar bg-base-300 ">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Developer</a>
+        <Link to="/" className="btn btn-ghost text-xl">
+          Developer
+        </Link>
       </div>
       {user && (
         <div className="flex gap-3 mr-5">
-          <p>Welcome, {user.data.firstName}</p>
+          <p>Welcome, {user.firstName}</p>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -17,7 +32,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="user image" src={user.data.photoUrl} />
+                <img alt="user image" src={user.photoUrl} />
               </div>
             </div>
             <ul
@@ -25,13 +40,13 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Profile</a>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>
           </div>

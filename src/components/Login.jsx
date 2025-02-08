@@ -1,16 +1,24 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("sachin@gmail.com");
   const [password, setPassword] = useState("Sachin@123");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((store) => store.user);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleLogin = async () => {
     try {
@@ -22,17 +30,19 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data));
+      dispatch(addUser(res.data.data));
       navigate("/");
     } catch (e) {
       console.log(e);
+      setError(e.response.data);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="card glass w-80 h-60 ">
-        <div className="flex-column justify-center p-10">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="card glass w-80 min-h-60 ">
+        <h1 className="text-center mt-5">Login</h1>
+        <div className="flex-column justify-center p-10 pb-0">
           <label className="input input-bordered flex items-center gap-2 mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +64,7 @@ const Login = () => {
             />
           </label>
 
-          <label className="input input-bordered flex items-center gap-2 mb-4">
+          <label className="input input-bordered flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -77,7 +87,10 @@ const Login = () => {
             />
           </label>
         </div>
-        <div className="card-actions justify-end pr-5 pl-5">
+        {error && (
+          <p className="text-red-400 text-center mt-0">Error : {error}</p>
+        )}
+        <div className="card-actions justify-end pr-5 pl-5 mb-3">
           <button className="btn btn-primary" onClick={handleLogin}>
             Login
           </button>

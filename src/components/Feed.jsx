@@ -29,6 +29,13 @@ const Feed = () => {
     fetchFeed();
   }, []);
 
+  if (!feedData) return;
+
+  if (feedData.length <= 0)
+    return (
+      <div className="min-h-screen text-center mt-5">No new Users Found!!!</div>
+    );
+
   return (
     feedData && (
       <div className="min-h-screen flex justify-center items-center">

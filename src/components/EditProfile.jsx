@@ -7,11 +7,11 @@ import { addUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
 
 const EditProfile = ({ user }) => {
-  const [lastName, setLastName] = useState(user.lastName);
-  const [about, setAbout] = useState(user.about);
-  const [age, setAge] = useState(user.age);
-  const [gender, setGender] = useState(user.gender);
-  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [about, setAbout] = useState(user.about || "");
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [photoUrl, setPhotoUrl] = useState(user.photoUrl || "");
 
   const dispatch = useDispatch();
 
